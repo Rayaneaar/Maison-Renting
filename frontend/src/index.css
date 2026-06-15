@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light;
+  }
+  body {
+    @apply bg-sand text-black font-sans antialiased;
+  }
+  ::selection {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: black;
+  }
+  
+  /* Modernize native date pickers */
+  input[type="date"], input[type="datetime-local"] {
+    @apply text-black/90;
+  }
+  ::-webkit-calendar-picker-indicator {
+    filter: invert(0);
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+  ::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white border border-gray-200 shadow-sm;
+  }
+  .glass-strong {
+    @apply bg-gray-50 border border-gray-200 shadow-sm;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .animate-fade-up {
+    animation: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animate-fade-in {
+    animation: fade-in 1.2s ease both;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f9f9f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #d1d1d1;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+
+/* Leaflet dark tweaks */
+.leaflet-container {
+  background: #101012;
+  font-family: "Inter", sans-serif;
+}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: #1a1a1d;
+  color: #fff;
+}
