@@ -50,7 +50,6 @@ export default function Profile() {
       
       <div className="mx-auto max-w-[1200px] px-6 lg:px-10 pt-36 pb-28">
         
-        {/* Header Profile Info */}
         <div className="glass rounded-2xl p-8 lg:p-12 mb-16 flex flex-col items-center text-center gap-6 animate-fade-in">
           <div className="w-32 h-32 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
             <span className="text-5xl font-serif text-white/50">
@@ -65,11 +64,9 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* Seller Specific Content */}
         {profile.role === 'seller' && (
           <div className="grid lg:grid-cols-3 gap-12">
             
-            {/* Left: Properties */}
             <div className="lg:col-span-2">
               <h3 className="font-serif text-3xl mb-8">Active Listings</h3>
               {profile.properties?.length > 0 ? (
@@ -83,7 +80,6 @@ export default function Profile() {
               )}
             </div>
             
-            {/* Right: Reviews */}
             <div className="space-y-8">
               <h3 className="font-serif text-3xl mb-8">Client Reviews</h3>
               {profile.reviews?.length > 0 ? (

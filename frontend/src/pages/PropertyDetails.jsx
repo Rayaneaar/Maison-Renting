@@ -73,19 +73,18 @@ export default function PropertyDetails() {
       <main className="pt-32 pb-24">
         <div className="max-w-[1500px] mx-auto px-6 lg:px-10">
           
-          {/* Header Row */}
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-10">
             <div>
-              <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-zinc-500 hover:text-black text-xs font-medium uppercase tracking-wider mb-8 transition-colors">
+              <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-zinc-500 hover:text-black text-xs font-medium uppercase tracking-wider mb-6 lg:mb-8 transition-colors">
                 <ArrowLeft className="w-4 h-4" /> Back to Collection
               </button>
-              <h1 className="text-5xl lg:text-7xl font-medium tracking-tight mb-4">
+              <h1 className="text-4xl lg:text-7xl font-medium tracking-tight mb-4">
                 {property.title}
               </h1>
-              <p className="text-xl text-zinc-500">{property.city}, {property.address}</p>
+              <p className="text-lg lg:text-xl text-zinc-500">{property.city}, {property.address}</p>
             </div>
-            <div className="flex flex-col lg:items-end">
-              <p className="text-4xl font-medium mb-4">{formatPrice(property.price, property.type)}</p>
+            <div className="flex flex-col w-full lg:w-auto lg:items-end mt-4 lg:mt-0">
+              <p className="text-3xl lg:text-4xl font-medium mb-4">{formatPrice(property.price, property.type)}</p>
               <button 
                 onClick={handleEnquire}
                 className="bg-black text-white px-8 py-3 text-sm hover:bg-zinc-800 transition-colors w-full lg:w-auto"
@@ -95,8 +94,7 @@ export default function PropertyDetails() {
             </div>
           </div>
 
-          {/* Hero Image */}
-          <div className="relative aspect-[21/9] w-full overflow-hidden bg-zinc-100 mb-16">
+          <div className="relative aspect-video lg:aspect-[21/9] w-full overflow-hidden bg-zinc-100 mb-12 lg:mb-16">
             <motion.img 
               layoutId={`property-image-${property.id}`}
               src={currentImg} 
@@ -115,7 +113,6 @@ export default function PropertyDetails() {
             )}
           </div>
 
-          {/* Details Grid */}
           <div className="grid lg:grid-cols-3 gap-16">
             <div className="lg:col-span-2">
               <h2 className="text-2xl font-medium mb-6">About the property</h2>
@@ -123,7 +120,7 @@ export default function PropertyDetails() {
                 {property.description || "A magnificent architectural masterpiece offering unparalleled design and sophisticated living spaces."}
               </p>
 
-              <div className="grid sm:grid-cols-2 gap-x-12 gap-y-8 py-10 border-t border-b border-zinc-200">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8 py-10 border-t border-b border-zinc-200">
                 <div>
                   <p className="text-sm text-zinc-500 mb-1">Total Area</p>
                   <p className="text-2xl font-medium">{property.area} M²</p>
@@ -143,7 +140,6 @@ export default function PropertyDetails() {
               </div>
             </div>
 
-            {/* Sidebar Stats */}
             <div>
               <div className="bg-zinc-50 p-8 mb-8">
                 <h3 className="font-medium mb-6">Location Data</h3>
@@ -158,7 +154,7 @@ export default function PropertyDetails() {
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 bg-zinc-200 rounded-full" />
                   <div>
-                    <p className="font-medium">{property.owner?.name || "Maison Advisory"}</p>
+                    <p className="font-medium">{property.owner?.name || "immoMaroc Advisory"}</p>
                     <p className="text-sm text-zinc-500">Senior Broker</p>
                   </div>
                 </div>

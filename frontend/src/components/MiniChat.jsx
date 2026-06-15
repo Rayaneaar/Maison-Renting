@@ -21,10 +21,8 @@ export default function MiniChat() {
       const reqsData = Array.isArray(reqsRes.data) ? reqsRes.data : [];
       const offersData = Array.isArray(offersRes.data) ? offersRes.data : [];
       const all = [...reqsData, ...offersData];
-      // Only keep accepted
       const accepted = all.filter(o => o.status === 'accepted');
       
-      // Remove duplicates if any (though shouldn't be since one is client_id one is property.owner_id)
       const unique = Array.from(new Map(accepted.map(item => [item.id, item])).values());
       
       setConversations(unique);
@@ -52,10 +50,8 @@ export default function MiniChat() {
       const res = await api.post(`/offers/${activeThread.id}/reply`, {
         message: input,
       });
-      // Update thread in place
       setActiveThread(res.data.offer);
       setInput("");
-      // Update in list
       setConversations(prev => prev.map(c => c.id === activeThread.id ? res.data.offer : c));
     } catch (err) {
       console.error(err);
@@ -66,7 +62,6 @@ export default function MiniChat() {
 
   return (
     <>
-      {/* Floating Button */}
       <button
         onClick={() => setOpen(true)}
         className={`fixed bottom-6 right-6 z-50 p-4 rounded-full bg-white text-ink-950 shadow-2xl hover:scale-105 transition-transform duration-300 ${open ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}
@@ -77,11 +72,9 @@ export default function MiniChat() {
         )}
       </button>
 
-      {/* Chat Window */}
       <div 
         className={`fixed bottom-6 right-6 z-50 w-[350px] max-w-[calc(100vw-3rem)] flex flex-col glass-strong shadow-2xl transition-all duration-500 origin-bottom-right ${open ? 'scale-100 opacity-100 rounded-2xl h-[500px]' : 'scale-50 opacity-0 h-[0px] pointer-events-none overflow-hidden'}`}
       >
-        {/* Header */}
         <div className="p-5 border-b border-white/[0.05] flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
             {activeThread && (
@@ -103,7 +96,6 @@ export default function MiniChat() {
           </button>
         </div>
 
-        {/* Content */}
         {!user ? (
           <div className="flex-1 flex items-center justify-center p-5 text-center text-white/50 text-sm">
             Please log in to view your messages.
@@ -132,7 +124,6 @@ export default function MiniChat() {
           </div>
         ) : (
           <>
-            {/* Messages */}
             <div className="flex-1 overflow-y-auto p-5 space-y-4">
               {activeThread.messages?.map((m) => {
                 const isMe = m.user_id === user.id;
@@ -147,7 +138,6 @@ export default function MiniChat() {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Input */}
             <form onSubmit={send} className="p-4 border-t border-white/[0.05] shrink-0 flex gap-2">
               <input
                 type="text"

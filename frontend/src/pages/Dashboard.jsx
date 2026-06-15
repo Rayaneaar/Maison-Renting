@@ -45,17 +45,17 @@ function OfferRow({ o, onClick }) {
       className="border-b border-zinc-200 last:border-0 pb-6 mb-6 cursor-pointer group animate-fade-in"
       onClick={() => onClick(o)}
     >
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
         <div className="flex-1">
           <p className="text-xl font-medium group-hover:text-zinc-600 transition-colors">{o.client?.name}</p>
-          <div className="flex gap-4 items-center mt-2">
+          <div className="flex flex-wrap gap-3 sm:gap-4 items-center mt-2">
             <span className="text-[10px] uppercase tracking-widest text-black border border-black px-2 py-0.5 font-bold">{o.type}</span>
-            <span className="text-zinc-500 text-sm truncate">{o.property?.title}</span>
+            <span className="text-zinc-500 text-sm truncate max-w-[150px] sm:max-w-xs">{o.property?.title}</span>
             <span className="text-zinc-400 text-xs">{new Date(o.created_at).toLocaleDateString()}</span>
           </div>
         </div>
-        <div className="flex items-center gap-6">
-          <div className="text-right">
+        <div className="flex items-center sm:gap-6 mt-2 sm:mt-0">
+          <div className="text-left sm:text-right">
              <p className="text-black font-medium text-xl">{o.amount ? formatPrice(o.amount) : "Inquiry"}</p>
              <p className="text-[10px] uppercase tracking-widest text-zinc-500 mt-1">{o.status}</p>
           </div>
@@ -122,7 +122,6 @@ export default function Dashboard() {
     );
   }
 
-  // Dummy chart data for visual effect matching Image 2
   const dummyChart1 = Array.from({length: 12}).map((_, i) => ({ val: Math.random() * 100 + 50 }));
   const dummyChart2 = Array.from({length: 12}).map((_, i) => ({ val: Math.random() * 50 + 20 + (i*10) }));
   const dummyChart3 = Array.from({length: 12}).map((_, i) => ({ val: Math.random() * 80 + 30 }));
@@ -139,7 +138,7 @@ export default function Dashboard() {
         
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-20 animate-fade-in">
           <div className="max-w-xl">
-            <h1 className="text-4xl lg:text-5xl font-medium tracking-tight mb-4">Reliable facilities<br/>for stable investments</h1>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight mb-4">Reliable facilities<br/>for stable investments</h1>
           </div>
           <div className="text-right max-w-sm hidden md:block">
             <p className="text-sm text-zinc-500 mb-2">Our assets are not just square meters, it's an opportunity for your capital to work for you.</p>
@@ -148,14 +147,14 @@ export default function Dashboard() {
         </div>
 
         {user.role === 'seller' && analytics && (
-          <div className="grid md:grid-cols-3 gap-6 mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
             <StatCard label="Total Residences" value={analytics.totals.properties ?? 0} chartData={dummyChart1} delayClass="[animation-delay:100ms]" />
             <StatCard label="Cumulative Views" value={compactNumber(analytics.totals.views ?? 0)} chartData={dummyChart2} delayClass="[animation-delay:200ms]" />
             <StatCard label="Pending Offers" value={analytics.totals.pending_offers ?? 0} chartData={dummyChart3} delayClass="[animation-delay:300ms]" />
           </div>
         )}
 
-        <div className="flex gap-8 border-b border-zinc-200 mb-12">
+        <div className="flex gap-8 border-b border-zinc-200 mb-12 overflow-x-auto whitespace-nowrap scrollbar-hide">
           {tabs.map((t) => (
             <button key={t.id} onClick={() => setTab(t.id)} className={`pb-4 text-sm font-medium transition-colors ${tab === t.id ? "border-b-2 border-black text-black" : "border-b-2 border-transparent text-zinc-500 hover:text-black"}`}>
               {t.label} ({t.count})
@@ -164,7 +163,7 @@ export default function Dashboard() {
         </div>
 
         {tab === "received" && (
-          <div className="bg-white p-8">
+          <div className="bg-white p-4 sm:p-8 rounded-2xl shadow-sm">
              {offers.length === 0 ? (
                <p className="text-zinc-500 italic">No received requests.</p>
              ) : (
@@ -174,7 +173,7 @@ export default function Dashboard() {
         )}
 
         {tab === "sent" && (
-          <div className="bg-white p-8">
+          <div className="bg-white p-4 sm:p-8 rounded-2xl shadow-sm">
              {sentRequests.length === 0 ? (
                <p className="text-zinc-500 italic">No sent requests.</p>
              ) : (
@@ -184,7 +183,7 @@ export default function Dashboard() {
         )}
 
         {tab === "portfolio" && user.role === "seller" && (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
              {properties.length === 0 ? (
                <p className="text-zinc-500 italic">No properties listed yet.</p>
              ) : (

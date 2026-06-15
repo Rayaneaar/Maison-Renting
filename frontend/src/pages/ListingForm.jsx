@@ -102,7 +102,6 @@ export default function ListingForm() {
       files.forEach((f) => data.append("images[]", f));
 
       const url = isEdit ? `/properties/${slug}` : "/properties";
-      // POST for both (Laravel route handles update via POST for multipart).
       await api.post(url, data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
@@ -136,7 +135,6 @@ export default function ListingForm() {
     <div className="bg-white text-black min-h-screen">
       <Navbar />
 
-      {/* Progress */}
       <div className="fixed top-[72px] inset-x-0 z-30 h-px bg-zinc-200">
         <div
           className="h-full bg-cyan transition-all duration-500"
@@ -357,7 +355,6 @@ export default function ListingForm() {
           )}
         </div>
 
-        {/* Nav */}
         <div className="flex items-center justify-between pt-16">
           <button
             onClick={prev}

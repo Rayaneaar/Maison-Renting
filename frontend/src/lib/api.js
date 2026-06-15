@@ -7,7 +7,6 @@ const api = axios.create({
   },
 });
 
-// Attach token on every request.
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("maison_token");
   if (token) {
@@ -16,7 +15,6 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Global 401 handling.
 api.interceptors.response.use(
   (res) => res,
   (error) => {

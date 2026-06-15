@@ -1,7 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 
-// Fix default marker icon paths (Vite bundling).
 const icon = new L.Icon({
   iconUrl:
     "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",

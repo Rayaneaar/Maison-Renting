@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import UnderlineInput from "../components/ui/UnderlineInput";
 import PillButton from "../components/ui/PillButton";
+import Logo from "../components/ui/Logo";
 
 const SPLIT_IMAGE =
   "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=85";
@@ -58,7 +59,6 @@ export default function Auth({ mode = "login" }) {
 
   return (
     <div className="min-h-screen flex bg-white text-black">
-      {/* Image half */}
       <div className="hidden lg:block lg:w-1/2 relative overflow-hidden">
         <img
           src={SPLIT_IMAGE}
@@ -67,32 +67,23 @@ export default function Auth({ mode = "login" }) {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-black/60" />
         <div className="absolute bottom-16 left-12 right-12">
-          <Link
-            to="/"
-            className="font-serif text-3xl tracking-[0.3em] block mb-6"
-          >
-            MAISON
-          </Link>
+          <Logo className="mb-6" lightText={true} />
           <p className="font-serif text-5xl leading-tight text-white/90 max-w-md">
             Step into a world reserved for the few.
           </p>
         </div>
       </div>
 
-      {/* Form half */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center px-8 py-16">
-        <div className="w-full max-w-md animate-fade-up">
-          <Link
-            to="/"
-            className="lg:hidden font-serif text-2xl tracking-[0.3em] block mb-10 text-center"
-          >
-            MAISON
-          </Link>
+      <div className="w-full lg:w-1/2 flex items-center justify-center px-6 py-12 lg:px-8 lg:py-16">
+        <div className="w-full max-w-md animate-fade-up mt-8 lg:mt-0">
+          <div className="lg:hidden flex justify-center mb-10">
+            <Logo />
+          </div>
 
           <p className="text-[11px] uppercase tracking-[0.3em] text-cyan font-bold mb-4">
             {isLogin ? "Welcome Back" : "Become a Member"}
           </p>
-          <h1 className="font-serif text-5xl mb-10">
+          <h1 className="font-serif text-4xl lg:text-5xl mb-10">
             {isLogin ? "Sign In" : "Create Account"}
           </h1>
 

@@ -13,13 +13,11 @@ export default function NotificationBell() {
       const newNotifications = res.data;
       
       setNotifications((prev) => {
-        // Find newly arrived unread notifications
         const prevUnreadIds = new Set(prev.filter(n => !n.read_at).map(n => n.id));
         const currentUnread = newNotifications.filter(n => !n.read_at);
         
         currentUnread.forEach(n => {
           if (!prevUnreadIds.has(n.id) && prev.length > 0) {
-            // New notification arrived!
             if (n.type.includes('offer_accepted') || n.type.includes('success')) {
               toast.success(n.data.message, { style: { background: '#111', color: '#fff', border: '1px solid #739E82' } });
             } else {

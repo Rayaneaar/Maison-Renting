@@ -45,7 +45,6 @@ export default function Catalog() {
       .then((res) => setProperties(res.data.data))
       .catch(() => setProperties([]))
       .finally(() => setLoading(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   useEffect(() => {
@@ -72,7 +71,6 @@ export default function Catalog() {
       <Navbar />
 
       <div className="mx-auto max-w-[1500px] px-6 lg:px-10 pt-36 pb-28">
-        {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
           <div>
             <p className="text-[11px] uppercase tracking-[0.3em] text-zinc-500 mb-4 font-bold">
@@ -83,7 +81,7 @@ export default function Catalog() {
 
           <button
             onClick={() => setDrawerOpen(true)}
-            className="self-start md:self-auto flex items-center gap-3 border border-zinc-200 hover:border-black bg-white px-7 py-3 text-[11px] uppercase tracking-[0.22em] transition-colors group"
+            className="w-full md:w-auto flex items-center justify-center md:justify-start gap-3 border border-zinc-200 hover:border-black bg-white px-7 py-3 text-[11px] uppercase tracking-[0.22em] transition-colors group"
           >
             <span className="h-1.5 w-1.5 bg-black" />
             Filters
@@ -105,7 +103,7 @@ export default function Catalog() {
             </p>
           </div>
         ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12 lg:gap-x-8 lg:gap-y-16">
             {properties.map((p, i) => (
               <PropertyCard key={p.id} property={p} index={i} />
             ))}

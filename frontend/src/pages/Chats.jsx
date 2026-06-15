@@ -12,21 +12,21 @@ function OfferRow({ o, onClick }) {
       className="border-b border-zinc-200 last:border-0 pb-6 mb-6 cursor-pointer group animate-fade-in"
       onClick={() => onClick(o)}
     >
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
         <div className="flex-1">
-          <p className="font-medium text-2xl group-hover:text-zinc-600 transition-colors">
+          <p className="font-medium text-xl sm:text-2xl group-hover:text-zinc-600 transition-colors">
             {o.property?.title}
           </p>
-          <div className="flex gap-4 items-center mt-2">
+          <div className="flex flex-wrap gap-3 sm:gap-4 items-center mt-2">
             <span className="text-[10px] uppercase tracking-widest text-black border border-black font-bold px-2 py-0.5 rounded-full">
               {o.type}
             </span>
-            <span className="text-zinc-500 text-sm">{o.property?.owner?.name || "Seller"}</span>
+            <span className="text-zinc-500 text-sm max-w-[150px] sm:max-w-xs truncate">{o.property?.owner?.name || "Seller"}</span>
             <span className="text-zinc-400 text-xs">{new Date(o.created_at).toLocaleDateString()}</span>
           </div>
         </div>
-        <div className="flex items-center gap-6">
-          <div className="text-right">
+        <div className="flex items-center sm:gap-6 mt-2 sm:mt-0">
+          <div className="text-left sm:text-right">
              <p className="text-black font-medium text-xl">{o.amount ? formatPrice(o.amount) : "Inquiry"}</p>
              <p className="text-[10px] uppercase tracking-widest text-zinc-500 mt-1">{o.status}</p>
           </div>
@@ -80,10 +80,10 @@ export default function Chats() {
       <div className="mx-auto max-w-[1000px] px-6 lg:px-10 pt-36 pb-28">
         <div className="mb-16 animate-fade-in">
           <p className="text-[11px] uppercase tracking-widest text-zinc-500 font-bold mb-4">Welcome, {user?.name}</p>
-          <h1 className="font-medium text-5xl tracking-tight">Your Chats</h1>
+          <h1 className="font-medium text-4xl lg:text-5xl tracking-tight">Your Chats</h1>
         </div>
 
-        <div className="bg-white rounded-3xl p-8 shadow-sm">
+        <div className="bg-white rounded-3xl p-4 sm:p-8 shadow-sm">
             {sentRequests.length === 0 ? (
             <p className="text-zinc-500 italic">You have no active chats or requests yet.</p>
             ) : (

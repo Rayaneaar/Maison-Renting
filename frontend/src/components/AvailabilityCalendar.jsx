@@ -18,7 +18,6 @@ export default function AvailabilityCalendar({ bookedDates = [] }) {
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
-  // Normalize booked dates to midnight for easy comparison
   const blockedRanges = bookedDates.map(b => ({
     start: new Date(new Date(b.start_date).setHours(0, 0, 0, 0)),
     end: new Date(new Date(b.end_date).setHours(0, 0, 0, 0))
