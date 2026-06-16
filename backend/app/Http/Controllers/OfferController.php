@@ -11,7 +11,7 @@ use Illuminate\Validation\Rule;
 
 class OfferController extends Controller
 {
-    /** Client: submit an offer / contact request on a property. */
+    
     public function store(Request $request, Property $property)
     {
         $data = $request->validate([
@@ -26,7 +26,7 @@ class OfferController extends Controller
         $offer = $property->offers()->create([
             'client_id' => $request->user()->id,
             'amount' => $data['amount'] ?? null,
-            'message' => $data['message'] ?? null, // legacy, keeping just in case
+            'message' => $data['message'] ?? null, 
             'type' => $data['type'] ?? 'offer',
             'viewing_date' => $data['viewing_date'] ?? null,
             'start_date' => $data['start_date'] ?? null,
@@ -34,7 +34,7 @@ class OfferController extends Controller
             'status' => 'pending',
         ]);
 
-        // Always create an initial message to start the thread
+        
         $offer->messages()->create([
             'user_id' => $request->user()->id,
             'message' => $data['message'] ?? 'Submitted a new ' . $offer->type . ' request.',
@@ -43,7 +43,7 @@ class OfferController extends Controller
 
         $offer->load('client:id,name,email,phone');
 
-        // Notify seller
+        
         Notification::create([
             'user_id' => $property->user_id,
             'type' => 'offer_received',
@@ -59,7 +59,7 @@ class OfferController extends Controller
         return response()->json($offer, 201);
     }
 
-    /** Client: list sent offers/requests */
+    
     public function sent(Request $request)
     {
         $offers = Offer::query()
@@ -71,7 +71,7 @@ class OfferController extends Controller
         return response()->json($offers);
     }
 
-    /** Seller: list all offers received across their properties. */
+    
     public function received(Request $request)
     {
         $offers = Offer::query()
@@ -83,10 +83,10 @@ class OfferController extends Controller
         return response()->json($offers);
     }
 
-    /** Both: Reply to a thread and optionally change status */
+    
     public function reply(Request $request, Offer $offer)
     {
-        // Must be the seller or the client
+        
         if ($offer->client_id !== $request->user()->id && $offer->property->user_id !== $request->user()->id) {
             abort(403);
         }
@@ -110,7 +110,7 @@ class OfferController extends Controller
             }
         }
 
-        // Notify the OTHER party
+        
         $recipientId = ($request->user()->id === $offer->client_id) ? $offer->property->user_id : $offer->client_id;
         
         Notification::create([
@@ -126,7 +126,7 @@ class OfferController extends Controller
         return response()->json($offer->load('messages.user:id,name'));
     }
 
-    /** Seller: accept / reject an offer directly (legacy support / fast action) */
+    
     public function update(Request $request, Offer $offer)
     {
         $this->authorize('manage', $offer->property);
@@ -137,7 +137,7 @@ class OfferController extends Controller
 
         $offer->update($data);
 
-        // Notify client
+        
         if ($data['status'] !== 'pending') {
             Notification::create([
                 'user_id' => $offer->client_id,

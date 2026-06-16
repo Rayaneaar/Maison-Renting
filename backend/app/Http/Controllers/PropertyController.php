@@ -11,7 +11,7 @@ use Illuminate\Validation\Rule;
 
 class PropertyController extends Controller
 {
-    /** Public listing with search & filters. */
+    
     public function index(Request $request)
     {
         $query = Property::query()
@@ -50,7 +50,7 @@ class PropertyController extends Controller
         return PropertyResource::collection($query->paginate(12));
     }
 
-    /** Public detail view; increments views. */
+    
     public function show(Property $property)
     {
         $property->increment('views_count');
@@ -73,7 +73,7 @@ class PropertyController extends Controller
         return new PropertyResource($property);
     }
 
-    /** Seller: list own properties. */
+    
     public function mine(Request $request)
     {
         $properties = $request->user()

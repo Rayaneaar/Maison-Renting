@@ -21,23 +21,23 @@ class DashboardController extends Controller
             ->where('status', 'pending')
             ->count();
 
-        // Views per property (for the thin-line / bar chart).
+        
         $viewsByProperty = $properties->map(fn ($p) => [
             'title' => $p->title,
             'views' => (int) $p->views_count,
             'offers' => (int) $p->offers_count,
         ])->values();
 
-        // Offers grouped by status (for donut / summary).
+        
         $offersByStatus = Offer::whereHas('property', fn ($q) => $q->where('user_id', $user->id))
             ->selectRaw('status, count(*) as count')
             ->groupBy('status')
             ->pluck('count', 'status');
 
-        // Calculate engagement rate
+        
         $engagementRate = $totalViews > 0 ? round(($totalOffers / $totalViews) * 100, 2) : 0;
 
-        // Generate Insights
+        
         $insights = [];
         if ($totalViews > 1000 && $engagementRate < 1) {
             $insights[] = "High visibility but low engagement. Consider adjusting your pricing.";

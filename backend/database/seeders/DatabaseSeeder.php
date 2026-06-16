@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
             'phone' => '+212 622 33 44 55',
         ]);
 
-        // Seed some reviews for the sellers
+        
         \App\Models\SellerReview::create([
             'user_id' => $seller1->id,
             'reviewer_name' => 'Omar H.',
@@ -63,7 +63,7 @@ class DatabaseSeeder extends Seeder
             'comment' => 'Exceptional service and exquisite property selection.',
         ]);
 
-        // Curated luxury image sets (Unsplash architectural/twilight).
+        
         $imageSets = [
             [
                 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80',
@@ -300,7 +300,7 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
 
-            // Seed a couple of offers on the first few listings.
+            
             if ($i < 4) {
                 Offer::create([
                     'property_id' => $property->id,
